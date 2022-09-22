@@ -41,11 +41,11 @@ def main():
         if not ret:
             print('Error: could not read frame')
             sys.exit(1)
-        # else:
-        #     ret, buffer = cv2.imencode('.jpg', frame)
-        #     frame = buffer.tobytes()
-        #     yield (b'--frame\r\n'
-        #            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+        else:
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
 
         if args.size > 0:
             frame = cv2.resize(frame, (args.size, args.size))
@@ -57,16 +57,16 @@ def main():
 
     cam.release()
 
-# @app.route('/video_feed')
-# def video_feed():
-#     #Video streaming route. Put this in the src attribute of an img tag
-#     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+@app.route('/video_feed')
+def video_feed():
+    #Video streaming route. Put this in the src attribute of an img tag
+    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-# @app.route('/')
-# def index():
-#     """Video streaming home page."""
-#     return render_template('index.html')
+@app.route('/')
+def index():
+    """Video streaming home page."""
+    return render_template('index.html')
 
 
 
