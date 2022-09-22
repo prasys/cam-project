@@ -6,6 +6,8 @@ import sys
 import argparse
 from flask import Flask, render_template, Response
 # capture from webcam and save to file with timestamp
+app = Flask(__name__)
+
 def main():
 
     parser = argparse.ArgumentParser(description='blah')
@@ -32,8 +34,7 @@ def main():
         sys.exit(1)
     
     if args.live == 1:
-        app = Flask(__name__)
-        app.run(debug=True)
+        app.run(debug=False)
 
     for i in range(args.number):
         ret, frame = cam.read()
