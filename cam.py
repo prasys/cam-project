@@ -7,7 +7,6 @@ import argparse
 # capture from webcam and save to file with timestamp
 def main():
 
-
     parser = argparse.ArgumentParser(description='blah')
     parser.add_argument('-d', '--directory', default='.', help='directory to save images')
     parser.add_argument('-n', '--number', default=1, type=int, help='number of images to capture')
@@ -40,5 +39,5 @@ def main():
 
     cam.release()
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
