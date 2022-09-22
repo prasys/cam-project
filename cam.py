@@ -4,39 +4,45 @@ import datetime
 import os
 import sys
 import argparse
-from flask import Flask, render_template, Response
-# capture from webcam and save to file with timestamp
-app = Flask(__name__)
+# from flask import Flask, render_template, Response
+# # capture from webcam and save to file with timestamp
+# app = Flask(__name__)
 
 def main():
+    #print app version and credits
+    print("-----Cam v0.1------")
+    print("-----C) Pradeesh. Made with <3 for future padawans---------")
+    print("-----May the Force be with you------")
+    print("-----To Quit Press Escape")
+
+
 
     parser = argparse.ArgumentParser(description='blah')
     parser.add_argument('-d', '--directory', default='.', help='directory to save images')
     parser.add_argument('-n', '--number', default=1, type=int, help='number of images to capture')
     parser.add_argument('-i', '--interval', default=1, type=int, help='interval between captures')
-    parser.add_argument('-s', '--size', default=0, type=int, help='size of image to capture')
+    parser.add_argument('-s', '--size', default=0, type=int, help='resize of image to capture')
     parser.add_argument('-c', '--camera', default=0, type=int, help='camera size')
-    parser.add_argument('-l', '--live', default=0, type=int, help='live video')
 
 
     args = parser.parse_args()
 
     if not os.path.isdir(args.directory):
-        # print('Error: directory does not exist')
+        print('Directory does not exist..Creating one :)')
         os.mkdir(args.directory)
 
-        sys.exit(1)
+        #sys.exit(1)
         
 
     cam = cv2.VideoCapture(args.camera)
     if not cam.isOpened():
-        print('Error: could not open camera')
+        print('Opps: Could not open Camera')
         sys.exit(1)
     
     if args.live == 1:
         app.run(debug=False)
 
-    for i in range(args.number):
+    while True:
         ret, frame = cam.read()
         if not ret:
             print('Error: could not read frame')
@@ -54,21 +60,10 @@ def main():
         cv2.imwrite(filename, frame)
         print('Saved image to', filename)
         time.sleep(args.interval)
-
-    cam.release()
-
-@app.route('/video_feed')
-def video_feed():
-    #Video streaming route. Put this in the src attribute of an img tag
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-@app.route('/')
-def index():
-    """Video streaming home page."""
-    return render_template('index.html')
-
-
+        #break loop on escape key
+        if cv2.waitKey(1) == 27:
+            cam.release()
+            break
 
 if __name__ == '__main__':
     main()
