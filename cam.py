@@ -12,13 +12,19 @@ def main():
     parser.add_argument('-n', '--number', default=1, type=int, help='number of images to capture')
     parser.add_argument('-i', '--interval', default=1, type=int, help='interval between captures')
     parser.add_argument('-s', '--size', default=0, type=int, help='size of image to capture')
+    parser.add_argument('-c', '--camera', default=0, type=int, help='camera size')
+    # parser.add_argument('-l', '--live', default=0, type=int, help='live video')
+
+
     args = parser.parse_args()
 
     if not os.path.isdir(args.directory):
-        print('Error: directory does not exist')
+        # print('Error: directory does not exist')
+        os.mkdir(args.directory)
+
         sys.exit(1)
 
-    cam = cv2.VideoCapture(0)
+    cam = cv2.VideoCapture(args.camera)
     if not cam.isOpened():
         print('Error: could not open camera')
         sys.exit(1)
@@ -38,6 +44,8 @@ def main():
         time.sleep(args.interval)
 
     cam.release()
+
+
 
 if __name__ == '__main__':
     main()
