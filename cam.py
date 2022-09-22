@@ -32,6 +32,7 @@ def main():
         sys.exit(1)
     
     if args.live == 1:
+        app = Flask(__name__)
         app.run(debug=True)
 
     for i in range(args.number):
