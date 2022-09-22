@@ -1,11 +1,12 @@
+import cv2
+import time
+import datetime
+import os
+import sys
+import argparse
 # capture from webcam and save to file with timestamp
 def main():
-    import cv2
-    import time
-    import datetime
-    import os
-    import sys
-    import argparse
+
 
     parser = argparse.ArgumentParser(description='blah')
     parser.add_argument('-d', '--directory', default='.', help='directory to save images')
