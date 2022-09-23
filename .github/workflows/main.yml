@@ -40,7 +40,7 @@ jobs:
       - uses: Nuitka/Nuitka-Action@v0.4
         with:
           script-name: cam.py
-          onefile: true
+          onefile: false
           enable-plugins: numpy
   
       # Uploads artifacts
