@@ -54,12 +54,13 @@ def main():
         print('Saved image to', filename)
         filename_static = os.path.join(args.directory, 'output.jpg')
         cv2.imwrite(filename_static, frame) #static file name that is needed 
-        time.sleep(args.interval)
-        #break the loop on escape key
         if k == ord('q'):
             cam.release()
             print("Exiting...")
             break
+        time.sleep(args.interval)
+        #break the loop on escape key
+
 
 if __name__ == '__main__':
     main()
