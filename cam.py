@@ -11,15 +11,14 @@ import argparse
 def main():
     #print app version and credits
     print("-----Cam v0.1------")
-    print("-----C) Pradeesh. Made with <3 for future padawans---------")
+    print("-----(C) Pradeesh. Made with <3 for future padawans---------")
     print("-----May the Force be with you------")
-    print("-----To Quit Press Escape")
+    print("-----To Quit Press Q")
 
 
 
     parser = argparse.ArgumentParser(description='blah')
     parser.add_argument('-d', '--directory', default='.', help='directory to save images')
-    parser.add_argument('-n', '--number', default=1, type=int, help='number of images to capture')
     parser.add_argument('-i', '--interval', default=1, type=int, help='interval between captures')
     parser.add_argument('-s', '--size', default=0, type=int, help='resize of image to capture')
     parser.add_argument('-c', '--camera', default=0, type=int, help='camera size')
@@ -40,6 +39,7 @@ def main():
     
 
     while True:
+        k = cv2.waitKey(1) & 0xFF 
         ret, frame = cam.read()
         if not ret:
             print('Error: could not read frame')
@@ -55,9 +55,10 @@ def main():
         filename_static = os.path.join(args.directory, 'output.jpg')
         cv2.imwrite(filename_static, frame) #static file name that is needed 
         time.sleep(args.interval)
-        #break loop on escape key
-        if cv2.waitKey(1) == 27:
+        #break the loop on escape key
+        if k == ord('q'):
             cam.release()
+            print("Exiting...")
             break
 
 if __name__ == '__main__':
