@@ -12,9 +12,9 @@ import keyboard
 def main():
     #print app version and credits
     print("-----Cam v0.1------")
-    print("-----(C) Pradeesh. Made with <3 for future padawans---------")
+    print("-----(C) Pradeesh. Made with <3 for future padawans------")
     print("-----May the Force be with you------")
-    print("-----To Quit Press either Q or Control+C")
+    print("-----To Quit Press Control+C------")
 
 
 
