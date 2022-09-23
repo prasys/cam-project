@@ -31,16 +31,13 @@ def main():
         print('Directory does not exist..Creating one :)')
         os.mkdir(args.directory)
 
-        #sys.exit(1)
-        
+        #sys.exit(1) 
 
     cam = cv2.VideoCapture(args.camera)
     if not cam.isOpened():
         print('Opps: Could not open Camera')
         sys.exit(1)
     
-    if args.live == 1:
-        app.run(debug=False)
 
     while True:
         ret, frame = cam.read()
@@ -55,6 +52,8 @@ def main():
         filename = os.path.join(args.directory, datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f') + '.jpg')
         cv2.imwrite(filename, frame)
         print('Saved image to', filename)
+        filename_static = os.path.join(args.directory, 'output.jpg')
+        cv2.imwrite(filename_static, frame) #static file name that is needed 
         time.sleep(args.interval)
         #break loop on escape key
         if cv2.waitKey(1) == 27:
