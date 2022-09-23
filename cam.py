@@ -47,11 +47,7 @@ def main():
         if not ret:
             print('Error: could not read frame')
             sys.exit(1)
-        else:
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
 
         if args.size > 0:
             frame = cv2.resize(frame, (args.size, args.size))
