@@ -4,7 +4,6 @@ import datetime
 import os
 import sys
 import argparse
-import keyboard
 # from flask import Flask, render_template, Response
 # # capture from webcam and save to file with timestamp
 # app = Flask(__name__)
