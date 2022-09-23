@@ -55,15 +55,13 @@ def main():
             print('Saved image to', filename)
             filename_static = os.path.join(args.directory, 'output.jpg')
             cv2.imwrite(filename_static, frame) #static file name that is needed 
-            if keyboard.read_key() == 'Q' or keyboard.read_key() == 'q':
-                cam.release()
-                print("Exiting...")
-                break
             time.sleep(args.interval)
     except KeyboardInterrupt:
         cam.release()
         print("Exiting...")
         #break the loop on escape key
+    except Exception:
+        pass
 
 
 if __name__ == '__main__':
