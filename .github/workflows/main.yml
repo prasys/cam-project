@@ -37,10 +37,11 @@ jobs:
         run: |
           pip install -r requirements.txt
       # Build python script into a stand-alone exe
-      - uses: jimkring/python-script-to-exe@v0.2.0
+      - uses: Nuitka/Nuitka-Action@v0.4
         with:
           script-name: cam
           onefile: true
+          enable-plugins: numpy
   
       # Uploads artifacts
       - name: "Upload Artifacts"
