@@ -4,6 +4,7 @@ import datetime
 import os
 import sys
 import argparse
+import keyboard
 # from flask import Flask, render_template, Response
 # # capture from webcam and save to file with timestamp
 # app = Flask(__name__)
@@ -13,7 +14,7 @@ def main():
     print("-----Cam v0.1------")
     print("-----(C) Pradeesh. Made with <3 for future padawans---------")
     print("-----May the Force be with you------")
-    print("-----To Quit Press Control+C")
+    print("-----To Quit Press either Q or Control+C")
 
 
 
@@ -54,6 +55,10 @@ def main():
             print('Saved image to', filename)
             filename_static = os.path.join(args.directory, 'output.jpg')
             cv2.imwrite(filename_static, frame) #static file name that is needed 
+            if keyboard.read_key() == 'Q' or keyboard.read_key() == 'q':
+                cam.release()
+                print("Exiting...")
+                break
             time.sleep(args.interval)
     except KeyboardInterrupt:
         cam.release()
