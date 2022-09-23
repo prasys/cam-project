@@ -13,7 +13,7 @@ def main():
     print("-----Cam v0.1------")
     print("-----(C) Pradeesh. Made with <3 for future padawans---------")
     print("-----May the Force be with you------")
-    print("-----To Quit Press Q")
+    print("-----To Quit Press Control+C")
 
 
 
@@ -37,28 +37,27 @@ def main():
         print('Opps: Could not open Camera')
         sys.exit(1)
     
+    try:
+        while True:
+            k = cv2.waitKey(1) & 0xFF 
+            ret, frame = cam.read()
+            if not ret:
+                print('Error: could not read frame')
+                sys.exit(1)
 
-    while True:
-        k = cv2.waitKey(1) & 0xFF 
-        ret, frame = cam.read()
-        if not ret:
-            print('Error: could not read frame')
-            sys.exit(1)
 
+            if args.size > 0:
+                frame = cv2.resize(frame, (args.size, args.size))
 
-        if args.size > 0:
-            frame = cv2.resize(frame, (args.size, args.size))
-
-        filename = os.path.join(args.directory, datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f') + '.jpg')
-        cv2.imwrite(filename, frame)
-        print('Saved image to', filename)
-        filename_static = os.path.join(args.directory, 'output.jpg')
-        cv2.imwrite(filename_static, frame) #static file name that is needed 
-        if k == ord('q'):
-            cam.release()
-            print("Exiting...")
-            break
-        time.sleep(args.interval)
+            filename = os.path.join(args.directory, datetime.datetime.now().strftime('%Y%m%d-%H%M%S-%f') + '.jpg')
+            cv2.imwrite(filename, frame)
+            print('Saved image to', filename)
+            filename_static = os.path.join(args.directory, 'output.jpg')
+            cv2.imwrite(filename_static, frame) #static file name that is needed 
+            time.sleep(args.interval)
+    except KeyboardInterrupt:
+        cam.release()
+        print("Exiting...")
         #break the loop on escape key
 
 
