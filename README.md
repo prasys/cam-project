@@ -7,7 +7,7 @@ specify a camera, the path to where to save the file and the interval given (in 
 
 ### Requirements
 
-You need [Python 3.8](https://www.python.org/downloads/release/python-380/) and a Webcam that is compatible with your operating system. 
+You need [Python 3.8](https://www.python.org/downloads/release/python-380/) or higher and a Webcam.
 
 This script has been tested on MacOS 10.14 and also on Windows 11. It is known to work on any other operating system where python is compatible such as Linux, Windows and MacOS
 
@@ -42,6 +42,7 @@ For more examples on how to use this commands, you may execute the following com
 
     python3 cam.py -?
     
+For MacOS, you may need to give permission to the script by going to Settings -> Security and Privacy and clicking on Allow to allow the script to be run. MacOS will also prompt you permission to access the webcam.
     
 ## Support
 
