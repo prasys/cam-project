@@ -34,7 +34,7 @@ Suppose, if we want to to store our files in Google Drive in a folder called cam
 
     python3 cam.py -d /Volumes/Google Drive/My \Drive/cam -i 60
 
-Alternatively, if we want to resize the image (reduce it by 50%) and use a different webcam (i.e, if you have two) you may use the following 
+Alternatively, if we want to enlarge the image (enlarge it by 50%) and use a different webcam (i.e, if you have two cameras such as in Microsoft Surface ) you may use the following, where it will use the other web camera (i.e, front camera in Microsoft Surface) and resizes the image by 50%. 
 
     python3 cam.py -c 1 -s 50
 
